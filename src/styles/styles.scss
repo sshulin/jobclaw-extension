@@ -1,0 +1,35 @@
+@import '../../node_modules/npm-font-open-sans/open-sans';
+
+// colors
+
+$color-green: #16a086;
+$color-red: #c0392b;
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 400px;
+  min-width: 400px;
+}
+body, input[type=text] {
+  font-family: 'Open Sans';
+}
+
+.pixel-art__pixel {
+	transition: 0.3s;
+	&:hover {
+		opacity: 0.7;
+	}
+	&:before,
+	&:after {
+
+		content: '';
+		height: 100%;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
+}
+
+@import './blocks/app';
