@@ -7,21 +7,24 @@ const ItemList = ({items, itemDeleted}) => {
 
 
   return (
-    <div>
+    <div className="itemlist">
       {
         items.data.map((item) => {
           const itemDeleteWrapper = () => {
             itemDeleted(item.id)
           }
           return (
-            <li
+            <div
               key={item.id}
+              className="itemlist__item"
               >
               { item.title }
-              <button onClick={itemDeleteWrapper}>
-                Delete
-              </button>
-            </li>
+              <div className="itemlist__actions">
+                <button onClick={itemDeleteWrapper} className="itemlist__button">
+                  Delete
+                </button>
+              </div>
+            </div>
           )
         })
       }

@@ -7,18 +7,18 @@ const Navbar = () => {
     <div className="navbar">
       <div className="navbar__list">
         <NavLink
-          to="/"
-          className="navbar__item"
-          activeClassName="navbar__item--active"
-          >
-          <i className="fa fa-calculator"></i>
-        </NavLink>
-        <NavLink
           to="/another"
           className="navbar__item"
           activeClassName="navbar__item--active"
           >
-          <i className="fa fa-list"></i>
+          <i className="fa fa-bars"></i>
+        </NavLink>
+        <NavLink
+          to="/home"
+          className="navbar__item"
+          activeClassName="navbar__item--active"
+          >
+          <i className="fa fa-briefcase"></i>
         </NavLink>
       </div>
     </div>

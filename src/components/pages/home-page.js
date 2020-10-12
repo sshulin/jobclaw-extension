@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import ItemList from '../core/item-list';
 
-import { NavLink } from 'react-router-dom';
+import { smartFetchItems } from '../../actions';
 
-const HomePage = () => {
+import { connect } from 'react-redux';
+
+const HomePage = ({ items, smartFetchItems }) => {
+
+  useEffect(() => {
+    smartFetchItems()
+  }, [smartFetchItems])
 
   return (
     <div className="page">
@@ -10,31 +17,22 @@ const HomePage = () => {
         <div className="page__title">
           Home page
         </div>
-        <div className="page__section">
-          <div className="home">
-            <div className="home__page-list">
-              <div className="home__page-item">
-                <NavLink
-                  className="home__page-link"
-                  to="/"
-                >
-                  Home
-                </NavLink>
-              </div>
-              <div className="home__page-item">
-                <NavLink
-                  className="home__page-link"
-                  to="/another"
-                >
-                  Another
-                </NavLink>
-              </div>
-            </div>
-          </div>
+        <div className="page__section page__section--grower">
+          <ItemList />
         </div>
       </div>
     </div>
   )
 }
 
-export default HomePage;
+const mapStateToProps = ({ items }) => {
+  return {
+    items
+  }
+}
+
+const mapDispatchToProps = {
+  smartFetchItems
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

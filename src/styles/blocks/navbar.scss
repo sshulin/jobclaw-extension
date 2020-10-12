@@ -1,0 +1,16 @@
+.navbar {
+  background: $color-light;
+  &__list {
+    display: flex;
+  }
+  &__item {
+    color: $color-dark;
+    font-size: 18px;
+    line-height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    &--active {
+      background: $color-bright;
+    }
+  }
+}

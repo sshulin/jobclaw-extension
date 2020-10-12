@@ -1,15 +1,16 @@
-import React, { useEffect } from 'react';
-import ItemList from '../core/item-list';
+import React from 'react';
 
-import { smartFetchItems } from '../../actions';
+import { NavLink } from 'react-router-dom';
 
-import { connect } from 'react-redux';
+const AnotherPage = () => {
 
-const AnotherPage = ({ items, smartFetchItems }) => {
-
-  useEffect(() => {
-    smartFetchItems()
-  }, [smartFetchItems])
+  // const chromeAction = () => {
+  //   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+  //     console.log(tabs);
+  //     chrome.tabs.sendMessage(tabs[0].id, {greeting: "hello"}, function(response) {
+  //     });
+  //   });
+  // }
 
   return (
     <div className="page">
@@ -17,22 +18,31 @@ const AnotherPage = ({ items, smartFetchItems }) => {
         <div className="page__title">
           <div>Another page</div>
         </div>
-        <div className="page__section page__section--grower">
-          <ItemList />
+        <div className="page__section">
+          <div className="home">
+            <div className="home__page-list">
+              <div className="home__page-item">
+                <NavLink
+                  className="home__page-link"
+                  to="/"
+                >
+                  Home
+                </NavLink>
+              </div>
+              <div className="home__page-item">
+                <NavLink
+                  className="home__page-link"
+                  to="/another"
+                >
+                  Another
+                </NavLink>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-const mapStateToProps = ({ items }) => {
-  return {
-    items
-  }
-}
-
-const mapDispatchToProps = {
-  smartFetchItems
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(AnotherPage);
+export default AnotherPage;

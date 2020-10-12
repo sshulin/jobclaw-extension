@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
   "version": "0.0.1",
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "description": "Sample application showing how to create an extension with Create React App",
+  "short_name": "Jobclaw",
+  "name": "Jobclaw extension",
+  "description": "Job vacancies saving extension for google chrome",
   "browser_action": {
     "default_title": "CRE",
     "default_popup": "popup.html"
@@ -22,6 +22,6 @@
     "48": "img/icon-48.png",
     "128": "img/icon-128.png"
   },
-  "permissions": ["activeTab"],
+  "permissions": ["activeTab", "storage", "tabs"],
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }
