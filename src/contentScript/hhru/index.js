@@ -62,7 +62,7 @@ export default () => {
       chrome.storage.sync.get('hhItems', (data) => {
 
         if(data && data.hhItems) {
-          vacancies = data.hhItems.map((item) => item.id);
+          vacancies = data.hhItems.map((item) => item.hhid);
           updateVacancySelection();
           // chrome.storage.sync.set({'hhItems': []});
         }

@@ -19,7 +19,7 @@ const updateItems = (state, action) => {
     }
 
     case 'ITEM_DELETED': {
-      const data = state.items.data.filter((item) => item.id !== action.payload);
+      const data = state.items.data.filter((item) => item.uuid !== action.payload);
       saveItemsApi(data).then();
 
       console.log(data, action.payload);

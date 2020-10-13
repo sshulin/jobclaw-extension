@@ -11,11 +11,11 @@ const ItemList = ({items, itemDeleted}) => {
       {
         items.data.map((item) => {
           const itemDeleteWrapper = () => {
-            itemDeleted(item.id)
+            itemDeleted(item.uuid)
           }
           return (
             <div
-              key={item.id}
+              key={item.uuid}
               className="itemlist__item"
               >
               { item.title }
