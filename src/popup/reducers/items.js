@@ -1,4 +1,4 @@
-import { saveItemsApi } from '../utils/api';
+import { saveItemsApi } from '../../shared/utils/api';
 
 const updateItems = (state, action) => {
 

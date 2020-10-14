@@ -1,5 +1,5 @@
 import itemCatalog from '../data/items';
-import { getItemsApi } from '../utils/api';
+import { getItemsApi } from '../../shared/utils/api';
 
 const itemsLoaded = (newItems) => {
 	return {
