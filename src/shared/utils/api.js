@@ -6,7 +6,7 @@ export const getItemsApi = () => {
       if(data) {
         resolve(data);
       } else {
-        reject(false)
+        reject([])
       }
     })
   });
@@ -14,7 +14,7 @@ export const getItemsApi = () => {
 
 export const saveItemsApi = (params) => {
   return new Promise((resolve, reject) => {
-    chromeStorage.updateFavoriteList({'favorite': params});
+    chromeStorage.updateFavoriteList(params);
 
     resolve(true);
   });
