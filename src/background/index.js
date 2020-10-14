@@ -1,7 +1,7 @@
 /*global chrome*/
 
 import { v4 as uuidv4 } from 'uuid';
-import axios from 'axios';
+import hhApi from '../shared/utils/hhApi';
 
 chrome.storage.sync.get('hhItems', (data) => {
 
@@ -14,14 +14,14 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     if(sender.tab) {
       if(request.eventName === 'hhVacancyClicked') {
-        axios.get('https://api.hh.ru/vacancies/' + request.payload.id).then((response) => {
+        hhApi.getVacancy(request.payload.id, (response) => {
 
           chrome.storage.sync.get('hhItems', (data) => {
 
             data.hhItems.push({
-              title: response.data.name,
-              salary: response.data.salary,
-              company: response.data.employer.name,
+              title: response.name,
+              salary: response.salary,
+              company: response.employer.name,
               hhid: request.payload.id,
               uuid: uuidv4()
             });
