@@ -1,5 +1,6 @@
 /*global chrome, window, document*/
 
+import chromeStorage from '../../shared/utils/chromeStorage';
 const { href }  = window.location;
 
 const togglerStyles = `
@@ -12,7 +13,7 @@ const togglerStyles = `
 `;
 
 export default () => {
-  let vacancies = [];  
+  let vacancies = [];
 
   if(href.indexOf('search/vacancy') !== -1) {
     document.querySelectorAll('.vacancy-serp-item').forEach((domNode) => {
@@ -59,19 +60,18 @@ export default () => {
 
     const checkVacancies = () => {
 
-      chrome.storage.sync.get('hhItems', (data) => {
+      chromeStorage.getFavoriteList((favorite) => {
 
-        if(data && data.hhItems) {
-          vacancies = data.hhItems.map((item) => item.hhid);
+        if(favorite) {
+          vacancies = favorite.map((item) => item.hhid);
           updateVacancySelection();
-          // chrome.storage.sync.set({'hhItems': []});
         }
       });
 
     }
 
     checkVacancies();
-    chrome.storage.onChanged.addListener(() => {
+    chromeStorage.subscribe(() => {
       checkVacancies();
     })
   }

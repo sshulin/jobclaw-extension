@@ -1,12 +1,10 @@
-/*global chrome*/
-
-// import { getLocalStorage, setLocalStorage } from './localStorage';
+import chromeStorage from './chromeStorage';
 
 export const getItemsApi = () => {
   return new Promise((resolve, reject) => {
-    chrome.storage.sync.get('hhItems', (data) => {
-      if(data && data.hhItems) {
-        resolve(data.hhItems);
+    chromeStorage.getFavoriteList((data) => {
+      if(data) {
+        resolve(data);
       } else {
         reject(false)
       }
@@ -16,7 +14,7 @@ export const getItemsApi = () => {
 
 export const saveItemsApi = (params) => {
   return new Promise((resolve, reject) => {
-    chrome.storage.sync.set({'hhItems': params});
+    chromeStorage.updateFavoriteList({'favorite': params});
 
     resolve(true);
   });

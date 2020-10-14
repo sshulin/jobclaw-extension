@@ -2,11 +2,11 @@
 
 import { v4 as uuidv4 } from 'uuid';
 import hhApi from '../shared/utils/hhApi';
+import chromeStorage from '../shared/utils/chromeStorage';
 
-chrome.storage.sync.get('hhItems', (data) => {
-
-  if(!data || !data.hhItems) {
-    chrome.storage.sync.set({'hhItems': []});
+chromeStorage.getFavoriteList((favorite) => {
+  if(!favorite) {
+    chromeStorage.updateFavoriteList([]);
   }
 })
 
@@ -16,9 +16,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       if(request.eventName === 'hhVacancyClicked') {
         hhApi.getVacancy(request.payload.id, (response) => {
 
-          chrome.storage.sync.get('hhItems', (data) => {
-
-            data.hhItems.push({
+          chromeStorage.getFavoriteList((favorite) => {
+            favorite.push({
               title: response.name,
               salary: response.salary,
               company: response.employer.name,
@@ -26,8 +25,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
               uuid: uuidv4()
             });
 
-            chrome.storage.sync.set({'hhItems': data.hhItems});
-          })
+            chromeStorage.updateFavoriteList(favorite);
+          });
         })
       }
     }
