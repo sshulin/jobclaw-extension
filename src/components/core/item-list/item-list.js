@@ -18,7 +18,17 @@ const ItemList = ({items, itemDeleted}) => {
               key={item.uuid}
               className="itemlist__item"
               >
-              { item.title }
+              <div className="itemlist__title">
+                { item.title }
+              </div>
+              <div className="itemlist__salary">
+                { item.salary.from ? (<span>{ item.salary.from }</span>) : null }
+                { item.salary.from && item.salary.to ? (<span> - </span>) : null }
+                { item.salary.to ? (<span>{ item.salary.to }</span>) : null }
+              </div>
+              <div className="itemlist__company">
+                { item.company }
+              </div>
               <div className="itemlist__actions">
                 <button onClick={itemDeleteWrapper} className="itemlist__button">
                   Delete
