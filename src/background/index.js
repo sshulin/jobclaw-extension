@@ -15,12 +15,23 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       if(request.eventName === 'hhVacancyClicked') {
         hhApi.getVacancy(request.payload.id, (response) => {
 
-          chromeStorage.createFavorite({
-            title: response.name,
-            salary: response.salary,
-            company: response.employer.name,
-            hhid: request.payload.id
-          });
+          chromeStorage.getFavoriteList((favoriteList) => {
+
+            const favoriteIndex = favoriteList.map((favorite) => favorite.hhid).indexOf(request.payload.id)
+
+            if(favoriteIndex === -1) {
+              chromeStorage.createFavorite({
+                title: response.name,
+                salary: response.salary,
+                company: response.employer.name,
+                hhid: request.payload.id
+              });
+            } else {
+              const newFavoriteList = favoriteList.filter((item) => item.hhid !== request.payload.id);
+
+              chromeStorage.updateFavoriteList(newFavoriteList);
+            }
+          })
         })
       }
     }

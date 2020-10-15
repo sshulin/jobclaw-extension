@@ -34,18 +34,27 @@ export default () => {
             id: vacancyId,
             title: link.innerHTML
           }
-        }, function(response) {
-          domNode.setSelected();
-        });
+        }
+        // , function(response) {
+        //   // domNode.setSelected();
+        //   // checkVacancies();
+        // }
+        );
       });
 
       linkWrapper.appendChild(toggler);
 
       domNode.setSelected = () => {
         toggler.innerHTML = '<3!';
-        toggler.style.fontWeight = '400';
         domNode.setAttribute('style', `
           background: #f2d3cc;
+        `);
+      }
+
+      domNode.setUnselected = () => {
+        toggler.innerHTML = '<3';
+        domNode.setAttribute('style', `
+          background: transparent;
         `);
       }
     });
@@ -54,6 +63,8 @@ export default () => {
       document.querySelectorAll('.vacancy-serp-item').forEach((domNode) => {
         if(vacancies.indexOf(domNode.vacancyId) !== -1) {
           domNode.setSelected();
+        } else {
+          domNode.setUnselected();
         }
       })
     }
