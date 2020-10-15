@@ -8,7 +8,7 @@ const chromeStorage = {
       if(data && data.favorite) {
         if(callback) callback(data.favorite);
       } else {
-        return false
+        callback(false)
       }
     })
   },
