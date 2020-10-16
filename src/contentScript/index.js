@@ -1,5 +1,7 @@
 /*global window*/
 
+import './hhru/hh.scss';
+
 import hhruHandler from './hhru/index';
 
 const { href }  = window.location;

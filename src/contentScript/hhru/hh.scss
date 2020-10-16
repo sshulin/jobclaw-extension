@@ -1,0 +1,14 @@
+.vacancy-serp-item {
+  &--jc-bookmarked {
+    background: #f2d3cc;
+  }
+
+  &__jc-toggler {
+    color: #a35061;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 600;
+    margin-left: 5px;
+  }
+}

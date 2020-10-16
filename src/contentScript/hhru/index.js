@@ -3,15 +3,6 @@
 import chromeStorage from '../../shared/utils/chromeStorage';
 const { href }  = window.location;
 
-const togglerStyles = `
-  color: #a35061;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 18px;
-  font-weight: 600;
-  margin-left: 5px;
-`;
-
 export default () => {
   let vacancies = [];
 
@@ -25,7 +16,7 @@ export default () => {
       domNode.vacancyId = vacancyId;
 
       let toggler = document.createElement('a');
-      toggler.setAttribute('style', togglerStyles);
+      toggler.classList.add('vacancy-serp-item__jc-toggler');
       toggler.innerHTML = '<3';
       toggler.addEventListener('click', () => {
         chrome.runtime.sendMessage({
@@ -45,17 +36,13 @@ export default () => {
       linkWrapper.appendChild(toggler);
 
       domNode.setSelected = () => {
+        domNode.classList.add('vacancy-serp-item--jc-bookmarked');
         toggler.innerHTML = '<3!';
-        domNode.setAttribute('style', `
-          background: #f2d3cc;
-        `);
       }
 
       domNode.setUnselected = () => {
+        domNode.classList.remove('vacancy-serp-item--jc-bookmarked');
         toggler.innerHTML = '<3';
-        domNode.setAttribute('style', `
-          background: transparent;
-        `);
       }
     });
 
