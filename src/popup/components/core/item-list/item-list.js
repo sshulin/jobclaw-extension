@@ -1,9 +1,15 @@
+/*global chrome*/
+
 import React from 'react';
 import { connect } from 'react-redux';
 
 import { itemDeleted } from '../../../actions';
 
 const ItemList = ({items, itemDeleted}) => {
+
+  const openHhLink = (item) => {
+    chrome.tabs.create({url: 'https://hh.ru/vacancy/' + item.hhid});
+  }
 
 
   return (
@@ -13,13 +19,17 @@ const ItemList = ({items, itemDeleted}) => {
           const itemDeleteWrapper = () => {
             itemDeleted(item.uuid)
           }
+          const openHhLinkWrapper = () => {
+            openHhLink(item);
+          }
+
           return (
             <div
               key={item.uuid}
               className="itemlist__item"
               >
               <div className="itemlist__title">
-                { item.title }
+                { item.title } { item.hhid ? (<span className="itemlist__hhlink" onClick={openHhLinkWrapper}>(hh.ru)</span>) : null }
               </div>
               <div className="itemlist__salary">
                 { item.salary.from ? (<span>{ item.salary.from }</span>) : null }
