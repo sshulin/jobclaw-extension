@@ -1,9 +1,6 @@
 /*global chrome*/
 
 import React from 'react';
-import { connect } from 'react-redux';
-
-import { itemDeleted } from '../../../actions';
 
 const ItemList = ({items, itemDeleted}) => {
 
@@ -52,14 +49,4 @@ const ItemList = ({items, itemDeleted}) => {
   )
 }
 
-const mapStateToProps = ({ items }) => {
-  return {
-    items
-  }
-}
-
-const mapDispatchToProps = {
-  itemDeleted
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ItemList);
+export default ItemList;

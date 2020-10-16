@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react';
 import ItemList from '../core/item-list';
 
-import { smartFetchItems } from '../../actions';
+import { smartFetchItems, itemDeleted } from '../../actions';
 
 import { connect } from 'react-redux';
 
-const HomePage = ({ items, smartFetchItems }) => {
+const HomePage = ({ items, smartFetchItems, itemDeleted }) => {
+
+  const itemDeletedWrapper = (uuid) => {
+    itemDeleted(uuid);
+  }
 
   useEffect(() => {
     smartFetchItems()
@@ -18,7 +22,10 @@ const HomePage = ({ items, smartFetchItems }) => {
           Home page
         </div>
         <div className="page__section page__section--grower">
-          <ItemList />
+          <ItemList
+            items={items}
+            itemDeleted={itemDeletedWrapper}
+          />
         </div>
       </div>
     </div>
@@ -32,7 +39,8 @@ const mapStateToProps = ({ items }) => {
 }
 
 const mapDispatchToProps = {
-  smartFetchItems
+  smartFetchItems,
+  itemDeleted
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
