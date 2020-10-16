@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react';
 import ItemList from '../core/item-list';
 
-import { smartFetchItems, itemDeleted } from '../../actions';
+import { smartFetchFavorite, favoriteDeleted } from '../../actions';
 
 import { connect } from 'react-redux';
 
-const HomePage = ({ items, smartFetchItems, itemDeleted }) => {
+const HomePage = ({ favorite, smartFetchFavorite, favoriteDeleted }) => {
 
   const itemDeletedWrapper = (uuid) => {
-    itemDeleted(uuid);
+    favoriteDeleted(uuid);
   }
 
   useEffect(() => {
-    smartFetchItems()
-  }, [smartFetchItems])
+    smartFetchFavorite()
+  }, [smartFetchFavorite])
 
   return (
     <div className="page">
@@ -23,7 +23,7 @@ const HomePage = ({ items, smartFetchItems, itemDeleted }) => {
         </div>
         <div className="page__section page__section--grower">
           <ItemList
-            items={items}
+            items={favorite}
             itemDeleted={itemDeletedWrapper}
           />
         </div>
@@ -32,15 +32,15 @@ const HomePage = ({ items, smartFetchItems, itemDeleted }) => {
   )
 }
 
-const mapStateToProps = ({ items }) => {
+const mapStateToProps = ({ favorite }) => {
   return {
-    items
+    favorite
   }
 }
 
 const mapDispatchToProps = {
-  smartFetchItems,
-  itemDeleted
+  smartFetchFavorite,
+  favoriteDeleted
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

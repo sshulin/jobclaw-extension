@@ -1,47 +1,46 @@
-import itemCatalog from '../data/items';
-import { getItemsApi } from '../../shared/utils/api';
+import { getFavoriteApi } from '../../shared/utils/api';
 
-const itemsLoaded = (newItems) => {
+const favoriteLoaded = (newItems) => {
 	return {
-		type: 'ITEMS_LOADED',
+		type: 'FAVORITE_LOADED',
 		payload: newItems
 	}
 }
 
-const itemsRequested = (payload) => {
+const favoriteRequested = (payload) => {
 	return {
-		type: 'ITEMS_REQUESTED',
+		type: 'FAVORITE_REQUESTED',
 		payload: payload
 	}
 }
 
-const itemDeleted = (itemCode) => {
+const favoriteDeleted = (itemUuid) => {
 	return {
-		type: 'ITEM_DELETED',
-		payload: itemCode
+		type: 'FAVORITE_DELETED',
+		payload: itemUuid
 	}
 }
 
-const fetchItems = () => (dispatch) => {
-	dispatch(itemsRequested());
+const fetchFavorite = () => (dispatch) => {
+	dispatch(favoriteRequested());
 
-	getItemsApi().then(
-		(items) => dispatch(itemsLoaded(items)),
-		(error) => dispatch(itemsLoaded(itemCatalog))
+	getFavoriteApi().then(
+		(items) => dispatch(favoriteLoaded(items)),
+		(error) => dispatch(favoriteLoaded([]))
 	);
 }
 
-const smartFetchItems = () => (dispatch, getState) => {
-	const { items: { loaded } } = getState();
+const smartFetchFavorite = () => (dispatch, getState) => {
+	const { favorite: { loaded } } = getState();
 
-	if(!loaded) dispatch(fetchItems());
+	if(!loaded) dispatch(fetchFavorite());
 }
 
 export {
-	itemsLoaded,
+	favoriteLoaded,
 
-	itemDeleted,
+	favoriteDeleted,
 
-	fetchItems,
-	smartFetchItems
+	fetchFavorite,
+	smartFetchFavorite
 };

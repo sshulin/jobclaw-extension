@@ -1,8 +1,8 @@
-import updateItems from './items';
+import updateFavorite from './favorite';
 
 const reducer = (state, action) => {
   return {
-    items: updateItems(state, action)
+    favorite: updateFavorite(state, action)
   }
 };
 

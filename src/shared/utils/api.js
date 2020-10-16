@@ -1,6 +1,6 @@
 import chromeStorage from './chromeStorage';
 
-export const getItemsApi = () => {
+export const getFavoriteApi = () => {
   return new Promise((resolve, reject) => {
     chromeStorage.getFavoriteList((data) => {
       if(data) {
@@ -12,7 +12,7 @@ export const getItemsApi = () => {
   });
 }
 
-export const saveItemsApi = (params) => {
+export const saveFavoriteApi = (params) => {
   return new Promise((resolve, reject) => {
     chromeStorage.updateFavoriteList(params);
 
