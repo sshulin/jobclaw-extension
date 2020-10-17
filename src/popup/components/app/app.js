@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { HomePage, AnotherPage } from '../pages';
+import { HomePage, AnotherPage, BlacklistPage } from '../pages';
 import Navbar from '../core/navbar';
 
 const App = () => {
@@ -29,20 +29,24 @@ const App = () => {
       <div className="app__body">
         <div className="app__content">
           <Switch>
-            <Route 
+            <Route
               path='/'
               render={() => {
                 return (<Redirect to="/home" />)
               }}
               exact
             />
-            <Route 
+            <Route
               path='/home'
               component={HomePage}
             />
-            <Route 
+            <Route
               path='/another'
               component={AnotherPage}
+            />
+            <Route
+              path='/blacklist'
+              component={BlacklistPage}
             />
           </Switch>
         </div>

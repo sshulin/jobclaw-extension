@@ -8,11 +8,16 @@ chromeStorage.getFavoriteList((favorite) => {
     chromeStorage.updateFavoriteList([]);
   }
 })
+chromeStorage.getBlacklist((blacklist) => {
+  if(!blacklist) {
+    chromeStorage.updateBlacklist([]);
+  }
+})
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     if(sender.tab) {
-      if(request.eventName === 'hhVacancyClicked') {
+      if(request.eventName === 'hhVacancyFavoriteClicked') {
         hhApi.getVacancy(request.payload.id, (response) => {
 
           chromeStorage.getFavoriteList((favoriteList) => {
@@ -30,6 +35,27 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
               const newFavoriteList = favoriteList.filter((item) => item.hhid !== request.payload.id);
 
               chromeStorage.updateFavoriteList(newFavoriteList);
+            }
+          })
+        })
+      } else if(request.eventName === 'hhVacancyBlacklistClicked') {
+        hhApi.getVacancy(request.payload.id, (response) => {
+
+          chromeStorage.getBlacklist((blacklist) => {
+
+            const blacklistIndex = blacklist.map((blacklistItem) => blacklistItem.hhid).indexOf(request.payload.id)
+
+            if(blacklistIndex === -1) {
+              chromeStorage.createBlacklistItem({
+                title: response.name,
+                salary: response.salary,
+                company: response.employer.name,
+                hhid: request.payload.id
+              });
+            } else {
+              const newBlacklist = blacklist.filter((item) => item.hhid !== request.payload.id);
+
+              chromeStorage.updateBlacklist(newBlacklist);
             }
           })
         })

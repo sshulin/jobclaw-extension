@@ -19,3 +19,23 @@ export const saveFavoriteApi = (params) => {
     resolve(true);
   });
 }
+
+export const getBlacklistApi = () => {
+  return new Promise((resolve, reject) => {
+    chromeStorage.getBlacklist((data) => {
+      if(data) {
+        resolve(data);
+      } else {
+        reject([])
+      }
+    })
+  });
+}
+
+export const saveBlacklistApi = (params) => {
+  return new Promise((resolve, reject) => {
+    chromeStorage.updateBlacklist(params);
+
+    resolve(true);
+  });
+}

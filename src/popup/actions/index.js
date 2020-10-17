@@ -1,4 +1,40 @@
-import { getFavoriteApi } from '../../shared/utils/api';
+import { getFavoriteApi, getBlacklistApi } from '../../shared/utils/api';
+
+const blacklistLoaded = (newItems) => {
+  return {
+    type: 'BLACKLIST_LOADED',
+    payload: newItems
+  }
+}
+
+const blacklistRequested = (payload) => {
+  return {
+    type: 'BLACKLIST_REQUESTED',
+    payload: payload
+  }
+}
+
+const blacklistDeleted = (itemUuid) => {
+  return {
+    type: 'BLACKLIST_DELETED',
+    payload: itemUuid
+  }
+}
+
+const fetchBlacklist = () => (dispatch) => {
+  dispatch(blacklistRequested());
+
+  getBlacklistApi().then(
+    (items) => dispatch(blacklistLoaded(items)),
+    (error) => dispatch(blacklistLoaded([]))
+  );
+}
+
+const smartFetchBlacklist = () => (dispatch, getState) => {
+  const { blacklist: { loaded } } = getState();
+
+  if(!loaded) dispatch(fetchBlacklist());
+}
 
 const favoriteLoaded = (newItems) => {
 	return {
@@ -42,5 +78,13 @@ export {
 	favoriteDeleted,
 
 	fetchFavorite,
-	smartFetchFavorite
+	smartFetchFavorite,
+
+
+  blacklistLoaded,
+
+  blacklistDeleted,
+
+  fetchBlacklist,
+  smartFetchBlacklist
 };

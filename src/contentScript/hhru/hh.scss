@@ -1,9 +1,21 @@
 .vacancy-serp-item {
-  &--jc-bookmarked {
+  &--jc-favorite {
     background: #f2d3cc;
+  }
+  &--jc-blacklisted {
+    display: none;
   }
 
   &__jc-toggler {
+    color: #a35061;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 600;
+    margin-left: 5px;
+  }
+
+  &__jc-blacklist-toggler {
     color: #a35061;
     cursor: pointer;
     display: inline-block;

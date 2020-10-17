@@ -20,6 +20,13 @@ const Navbar = () => {
           >
           <i className="fa fa-briefcase"></i>
         </NavLink>
+        <NavLink
+          to="/blacklist"
+          className="navbar__item"
+          activeClassName="navbar__item--active"
+          >
+          <i className="fa fa-ban"></i>
+        </NavLink>
       </div>
     </div>
   )

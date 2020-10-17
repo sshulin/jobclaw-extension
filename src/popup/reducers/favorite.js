@@ -22,8 +22,6 @@ const updateFavorite = (state, action) => {
       const data = state.favorite.data.filter((item) => item.uuid !== action.payload);
       saveFavoriteApi(data).then();
 
-      console.log(data, action.payload);
-
       return {
         ...state.favorite,
         data

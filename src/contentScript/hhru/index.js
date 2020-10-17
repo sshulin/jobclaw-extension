@@ -4,7 +4,8 @@ import chromeStorage from '../../shared/utils/chromeStorage';
 const { href }  = window.location;
 
 export default () => {
-  let vacancies = [];
+  let favoriteVacancies = [];
+  let blacklistVacancies = [];
 
   if(href.indexOf('search/vacancy') !== -1) {
     document.querySelectorAll('.vacancy-serp-item').forEach((domNode) => {
@@ -15,43 +16,69 @@ export default () => {
       const vacancyId = linkHref.split('/vacancy/')[1].split('?')[0];
       domNode.vacancyId = vacancyId;
 
-      let toggler = document.createElement('a');
-      toggler.classList.add('vacancy-serp-item__jc-toggler');
-      toggler.innerHTML = '<3';
-      toggler.addEventListener('click', () => {
+      let favoriteToggler = document.createElement('a');
+      favoriteToggler.classList.add('vacancy-serp-item__jc-toggler');
+      favoriteToggler.innerHTML = '<3';
+      favoriteToggler.addEventListener('click', () => {
         chrome.runtime.sendMessage({
-          eventName: "hhVacancyClicked",
+          eventName: "hhVacancyFavoriteClicked",
           payload: {
             id: vacancyId,
             title: link.innerHTML
           }
-        }
-        // , function(response) {
-        //   // domNode.setSelected();
-        //   // checkVacancies();
-        // }
-        );
+        })
       });
 
-      linkWrapper.appendChild(toggler);
+      linkWrapper.appendChild(favoriteToggler);
 
-      domNode.setSelected = () => {
-        domNode.classList.add('vacancy-serp-item--jc-bookmarked');
-        toggler.innerHTML = '<3!';
+      domNode.setFavorite = () => {
+        domNode.classList.add('vacancy-serp-item--jc-favorite');
+        favoriteToggler.innerHTML = '<3!';
       }
 
-      domNode.setUnselected = () => {
-        domNode.classList.remove('vacancy-serp-item--jc-bookmarked');
-        toggler.innerHTML = '<3';
+      domNode.unsetFavorite = () => {
+        domNode.classList.remove('vacancy-serp-item--jc-favorite');
+        favoriteToggler.innerHTML = '<3';
+      }
+
+      let blacklistToggler = document.createElement('a');
+      blacklistToggler.classList.add('vacancy-serp-item__jc-blacklist-toggler');
+      blacklistToggler.innerHTML = 'X';
+      blacklistToggler.addEventListener('click', () => {
+        chrome.runtime.sendMessage({
+          eventName: "hhVacancyBlacklistClicked",
+          payload: {
+            id: vacancyId,
+            title: link.innerHTML
+          }
+        })
+      });
+
+      linkWrapper.appendChild(blacklistToggler);
+
+      domNode.setBlacklisted = () => {
+        domNode.classList.add('vacancy-serp-item--jc-blacklisted');
+        blacklistToggler.innerHTML = 'X!';
+      }
+
+      domNode.unsetBlacklisted = () => {
+        domNode.classList.remove('vacancy-serp-item--jc-blacklisted');
+        blacklistToggler.innerHTML = 'X';
       }
     });
 
     const updateVacancySelection = () => {
       document.querySelectorAll('.vacancy-serp-item').forEach((domNode) => {
-        if(vacancies.indexOf(domNode.vacancyId) !== -1) {
-          domNode.setSelected();
+        if(favoriteVacancies.indexOf(domNode.vacancyId) !== -1) {
+          domNode.setFavorite();
         } else {
-          domNode.setUnselected();
+          domNode.unsetFavorite();
+        }
+
+        if(blacklistVacancies.indexOf(domNode.vacancyId) !== -1) {
+          domNode.setBlacklisted();
+        } else {
+          domNode.unsetBlacklisted();
         }
       })
     }
@@ -61,9 +88,15 @@ export default () => {
       chromeStorage.getFavoriteList((favorite) => {
 
         if(favorite) {
-          vacancies = favorite.map((item) => item.hhid);
-          updateVacancySelection();
+          favoriteVacancies = favorite.map((item) => item.hhid);
         }
+        chromeStorage.getBlacklist((blacklist) => {
+          if(blacklist) {
+            blacklistVacancies = blacklist.map((item) => item.hhid)
+          }
+
+          updateVacancySelection();
+        })
       });
 
     }
