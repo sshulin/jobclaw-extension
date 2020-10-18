@@ -2,6 +2,7 @@
 
 import hhApi from '../shared/utils/hhApi';
 import chromeStorage from '../shared/utils/chromeStorage';
+import hhToAppVacancy from '../shared/mappers/hhToAppVacancy';
 
 chromeStorage.getFavoriteList((favorite) => {
   if(!favorite) {
@@ -25,12 +26,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             const favoriteIndex = favoriteList.map((favorite) => favorite.hhid).indexOf(request.payload.id)
 
             if(favoriteIndex === -1) {
-              chromeStorage.createFavorite({
-                title: response.name,
-                salary: response.salary,
-                company: response.employer.name,
-                hhid: request.payload.id
-              });
+              chromeStorage.createFavorite(hhToAppVacancy(response));
             } else {
               const newFavoriteList = favoriteList.filter((item) => item.hhid !== request.payload.id);
 
@@ -46,12 +42,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             const blacklistIndex = blacklist.map((blacklistItem) => blacklistItem.hhid).indexOf(request.payload.id)
 
             if(blacklistIndex === -1) {
-              chromeStorage.createBlacklistItem({
-                title: response.name,
-                salary: response.salary,
-                company: response.employer.name,
-                hhid: request.payload.id
-              });
+              chromeStorage.createBlacklistItem(hhToAppVacancy(response));
             } else {
               const newBlacklist = blacklist.filter((item) => item.hhid !== request.payload.id);
 
