@@ -1,4 +1,4 @@
-import { getFavoriteApi, getBlacklistApi } from '../../shared/utils/api';
+import api from '../../shared/utils/api';
 
 const blacklistLoaded = (newItems) => {
   return {
@@ -24,7 +24,7 @@ const blacklistDeleted = (itemUuid) => {
 const fetchBlacklist = () => (dispatch) => {
   dispatch(blacklistRequested());
 
-  getBlacklistApi().then(
+  api.getBlacklist().then(
     (items) => dispatch(blacklistLoaded(items)),
     (error) => dispatch(blacklistLoaded([]))
   );
@@ -60,7 +60,7 @@ const favoriteDeleted = (itemUuid) => {
 const fetchFavorite = () => (dispatch) => {
 	dispatch(favoriteRequested());
 
-	getFavoriteApi().then(
+	api.getFavoriteList().then(
 		(items) => dispatch(favoriteLoaded(items)),
 		(error) => dispatch(favoriteLoaded([]))
 	);

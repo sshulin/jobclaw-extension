@@ -1,4 +1,4 @@
-import { saveFavoriteApi } from '../../shared/utils/api';
+import api from '../../shared/utils/api';
 
 const updateFavorite = (state, action) => {
 
@@ -20,7 +20,7 @@ const updateFavorite = (state, action) => {
 
     case 'FAVORITE_DELETED': {
       const data = state.favorite.data.filter((item) => item.uuid !== action.payload);
-      saveFavoriteApi(data).then();
+      api.updateFavoriteList(data).then();
 
       return {
         ...state.favorite,

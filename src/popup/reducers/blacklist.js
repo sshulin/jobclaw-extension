@@ -1,4 +1,4 @@
-import { saveBlacklistApi } from '../../shared/utils/api';
+import api from '../../shared/utils/api';
 
 const updateBlacklist = (state, action) => {
 
@@ -20,7 +20,7 @@ const updateBlacklist = (state, action) => {
 
     case 'BLACKLIST_DELETED': {
       const data = state.blacklist.data.filter((item) => item.uuid !== action.payload);
-      saveBlacklistApi(data).then();
+      api.updateBlacklist(data).then();
 
       return {
         ...state.blacklist,

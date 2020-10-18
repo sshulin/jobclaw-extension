@@ -1,6 +1,8 @@
 /*global chrome, window, document*/
 
 import chromeStorage from '../../shared/utils/chromeStorage';
+import api from '../../shared/utils/api';
+
 const { href }  = window.location;
 
 export default () => {
@@ -85,12 +87,12 @@ export default () => {
 
     const checkVacancies = () => {
 
-      chromeStorage.getFavoriteList((favorite) => {
+      api.getFavoriteList().then((favorite) => {
 
         if(favorite) {
           favoriteVacancies = favorite.map((item) => item.hhid);
         }
-        chromeStorage.getBlacklist((blacklist) => {
+        api.getBlacklist().then((blacklist) => {
           if(blacklist) {
             blacklistVacancies = blacklist.map((item) => item.hhid)
           }

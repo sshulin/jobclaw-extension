@@ -1,18 +1,23 @@
 /*global chrome*/
 
 import hhApi from '../shared/utils/hhApi';
-import chromeStorage from '../shared/utils/chromeStorage';
+import api from '../shared/utils/api';
+
 import hhToAppVacancy from '../shared/mappers/hhToAppVacancy';
 
-chromeStorage.getFavoriteList((favorite) => {
+api.getFavoriteList().then((favorite) => {
   if(!favorite) {
-    chromeStorage.updateFavoriteList([]);
+    api.updateFavoriteList([]).then();
   }
+}).catch(() => {
+  api.updateFavoriteList([]).then();
 })
-chromeStorage.getBlacklist((blacklist) => {
+api.getBlacklist().then((blacklist) => {
   if(!blacklist) {
-    chromeStorage.updateBlacklist([]);
+    api.updateBlacklist([]).then();
   }
+}).catch(() => {
+  api.updateBlacklist([]).then();
 })
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
@@ -21,32 +26,32 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       if(request.eventName === 'hhVacancyFavoriteClicked') {
         hhApi.getVacancy(request.payload.id, (response) => {
 
-          chromeStorage.getFavoriteList((favoriteList) => {
+          api.getFavoriteList().then((favoriteList) => {
 
             const favoriteIndex = favoriteList.map((favorite) => favorite.hhid).indexOf(request.payload.id)
 
             if(favoriteIndex === -1) {
-              chromeStorage.createFavorite(hhToAppVacancy(response));
+              api.createFavoriteItem(hhToAppVacancy(response)).then();
             } else {
               const newFavoriteList = favoriteList.filter((item) => item.hhid !== request.payload.id);
 
-              chromeStorage.updateFavoriteList(newFavoriteList);
+              api.updateFavoriteList(newFavoriteList).then();
             }
           })
         })
       } else if(request.eventName === 'hhVacancyBlacklistClicked') {
         hhApi.getVacancy(request.payload.id, (response) => {
 
-          chromeStorage.getBlacklist((blacklist) => {
+          api.getBlacklist().then((blacklist) => {
 
             const blacklistIndex = blacklist.map((blacklistItem) => blacklistItem.hhid).indexOf(request.payload.id)
 
             if(blacklistIndex === -1) {
-              chromeStorage.createBlacklistItem(hhToAppVacancy(response));
+              api.createBlacklistItem(hhToAppVacancy(response)).then();
             } else {
               const newBlacklist = blacklist.filter((item) => item.hhid !== request.payload.id);
 
-              chromeStorage.updateBlacklist(newBlacklist);
+              api.updateBlacklist(newBlacklist);
             }
           })
         })
