@@ -32,13 +32,14 @@ const ItemList = ({items, itemDeleted}) => {
                 { item.salary.from ? (<span>{ item.salary.from }</span>) : null }
                 { item.salary.from && item.salary.to ? (<span> - </span>) : null }
                 { item.salary.to ? (<span>{ item.salary.to }</span>) : null }
+                { item.salary.currency ? (<span className="itemlist__salary-currency">{ item.salary.currency }</span>) : null }
               </div>
               <div className="itemlist__company">
                 { item.company }
               </div>
               <div className="itemlist__actions">
-                <button onClick={itemDeleteWrapper} className="itemlist__button">
-                  Delete
+                <button onClick={itemDeleteWrapper} className="itemlist__button itemlist__button--delete">
+                  <i className="fa fa-remove"></i>
                 </button>
               </div>
             </div>
