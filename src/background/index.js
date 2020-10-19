@@ -5,20 +5,8 @@ import api from '../shared/utils/api';
 
 import hhToAppVacancy from '../shared/mappers/hhToAppVacancy';
 
-api.getFavoriteList().then((favorite) => {
-  if(!favorite) {
-    api.updateFavoriteList([]).then();
-  }
-}).catch(() => {
-  api.updateFavoriteList([]).then();
-})
-api.getBlacklist().then((blacklist) => {
-  if(!blacklist) {
-    api.updateBlacklist([]).then();
-  }
-}).catch(() => {
-  api.updateBlacklist([]).then();
-})
+api.initDefaultFavorite([]);
+api.initDefaultBlacklist([]);
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 

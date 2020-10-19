@@ -4,6 +4,16 @@ import { v4 as uuidv4 } from 'uuid';
 
 const api = {
 
+  initDefaultFavorite: (defaultList) => {
+    api.getFavoriteList().then((list) => {
+      if(!list) {
+        api.updateFavoriteList(defaultList).then();
+      }
+    }).catch(() => {
+      api.updateFavoriteList(defaultList).then();
+    });
+  },
+
   getFavoriteList: () => {
     return new Promise((resolve, reject) => {
       chromeStorage.getFavoriteList((data) => {
@@ -54,6 +64,16 @@ const api = {
 
   deleteFavoriteItem: (uuid) => {
     return api.deleteFavoriteItemByAttr('uuid', uuid);
+  },
+
+  initDefaultBlacklist: (defaultList) => {
+    api.getBlacklist().then((list) => {
+      if(!list) {
+        api.updateBlacklist(defaultList).then();
+      }
+    }).catch(() => {
+      api.updateBlacklist(defaultList).then();
+    });
   },
 
   getBlacklist: () => {
