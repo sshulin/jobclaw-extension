@@ -18,16 +18,6 @@ const updateBlacklist = (state, action) => {
       }
     }
 
-    case 'BLACKLIST_DELETED': {
-      const data = state.blacklist.data.filter((item) => item.uuid !== action.payload);
-      api.updateBlacklist(data).then();
-
-      return {
-        ...state.blacklist,
-        data
-      }
-    }
-
     default: {
       return state.blacklist;
     }

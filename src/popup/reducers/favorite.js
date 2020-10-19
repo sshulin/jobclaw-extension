@@ -18,16 +18,6 @@ const updateFavorite = (state, action) => {
       }
     }
 
-    case 'FAVORITE_DELETED': {
-      const data = state.favorite.data.filter((item) => item.uuid !== action.payload);
-      api.updateFavoriteList(data).then();
-
-      return {
-        ...state.favorite,
-        data
-      }
-    }
-
     default: {
       return state.favorite;
     }
