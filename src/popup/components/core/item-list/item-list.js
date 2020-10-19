@@ -28,12 +28,16 @@ const ItemList = ({items, itemDeleted}) => {
               <div className="itemlist__title">
                 { item.title } { item.hhid ? (<span className="itemlist__hhlink" onClick={openHhLinkWrapper}>(hh.ru)</span>) : null }
               </div>
-              <div className="itemlist__salary">
-                { item.salary.from ? (<span>{ item.salary.from }</span>) : null }
-                { item.salary.from && item.salary.to ? (<span> - </span>) : null }
-                { item.salary.to ? (<span>{ item.salary.to }</span>) : null }
-                { item.salary.currency ? (<span className="itemlist__salary-currency">{ item.salary.currency }</span>) : null }
-              </div>
+              { item.salary ? (
+                <div className="itemlist__salary">
+                  { item.salary.from ? (<span>{ item.salary.from }</span>) : null }
+                  { item.salary.from && item.salary.to ? (<span> - </span>) : null }
+                  { item.salary.to ? (<span>{ item.salary.to }</span>) : null }
+                  { item.salary.currency ? (<span className="itemlist__salary-currency">{ item.salary.currency }</span>) : null }
+                </div>
+              ) : (
+                <div className="itemlist__salary"></div>
+              ) }
               <div className="itemlist__company">
                 { item.company }
               </div>
