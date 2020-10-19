@@ -21,9 +21,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             if(favoriteIndex === -1) {
               api.createFavoriteItem(hhToAppVacancy(response)).then();
             } else {
-              const newFavoriteList = favoriteList.filter((item) => item.hhid !== request.payload.id);
-
-              api.updateFavoriteList(newFavoriteList).then();
+              api.deleteFavoriteItemByAttr('hhid', request.payload.id);
             }
           })
         })
@@ -37,9 +35,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             if(blacklistIndex === -1) {
               api.createBlacklistItem(hhToAppVacancy(response)).then();
             } else {
-              const newBlacklist = blacklist.filter((item) => item.hhid !== request.payload.id);
-
-              api.updateBlacklist(newBlacklist);
+              api.deleteBlacklistItemByAttr('hhid', request.payload.id);
             }
           })
         })
