@@ -1,32 +1,18 @@
 /*global chrome*/
 
 const chromeStorage = {
-  getFavoriteList: (callback) => {
-    chrome.storage.sync.get('favorite', (data) => {
-      if(data && data.favorite) {
-        if(callback) callback(data.favorite);
+
+  getVacancyList: (callback) => {
+    chrome.storage.sync.get('vacancy', (data) => {
+      if(data && data.vacancy) {
+        if(callback) callback(data.vacancy);
       } else {
         callback(false)
       }
     })
   },
-  updateFavoriteList: (data, callback) => {
-    chrome.storage.sync.set({'favorite': data});
-    if(callback) callback();
-  },
-
-
-  getBlacklist: (callback) => {
-    chrome.storage.sync.get('blacklist', (data) => {
-      if(data && data.blacklist) {
-        if(callback) callback(data.blacklist);
-      } else {
-        callback(false)
-      }
-    })
-  },
-  updateBlacklist: (data, callback) => {
-    chrome.storage.sync.set({'blacklist': data});
+  updateVacancyList: (data, callback) => {
+    chrome.storage.sync.set({'vacancy': data});
     if(callback) callback();
   },
 

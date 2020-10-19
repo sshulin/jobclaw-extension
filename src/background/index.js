@@ -5,8 +5,7 @@ import api from '../shared/utils/api';
 
 import hhToAppVacancy from '../shared/mappers/hhToAppVacancy';
 
-api.initDefaultFavorite([]);
-api.initDefaultBlacklist([]);
+api.initDefaultVacancy([]);
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
