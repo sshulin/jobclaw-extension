@@ -1,5 +1,3 @@
-import api from '../../shared/utils/api';
-
 const updateFavorite = (state, action) => {
 
   if(state === undefined) {

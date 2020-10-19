@@ -1,5 +1,3 @@
-import api from '../../shared/utils/api';
-
 const updateBlacklist = (state, action) => {
 
   if(state === undefined) {
