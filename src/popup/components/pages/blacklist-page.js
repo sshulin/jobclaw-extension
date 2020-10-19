@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import ItemList from '../core/item-list';
 
-import { smartFetchBlacklist, blacklistDeleted } from '../../actions';
+import { smartFetchBlacklist, requestBlacklistDelete } from '../../actions';
 
 import { connect } from 'react-redux';
 
-const BlacklistPage = ({ blacklist, smartFetchBlacklist, blacklistDeleted }) => {
+const BlacklistPage = ({ blacklist, smartFetchBlacklist, requestBlacklistDelete }) => {
 
   const itemDeletedWrapper = (uuid) => {
-    blacklistDeleted(uuid);
+    requestBlacklistDelete(uuid);
   }
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const mapStateToProps = ({ blacklist }) => {
 
 const mapDispatchToProps = {
   smartFetchBlacklist,
-  blacklistDeleted
+  requestBlacklistDelete
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BlacklistPage);

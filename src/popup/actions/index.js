@@ -14,11 +14,10 @@ const blacklistRequested = (payload) => {
   }
 }
 
-const blacklistDeleted = (itemUuid) => {
-  return {
-    type: 'BLACKLIST_DELETED',
-    payload: itemUuid
-  }
+const requestBlacklistDelete = (itemUuid) => (dispatch, getState) => {
+  api.deleteBlacklistItem(itemUuid)
+    .then(() => dispatch(fetchBlacklist()))
+    .catch(() => dispatch(fetchBlacklist()))
 }
 
 const fetchBlacklist = () => (dispatch) => {
@@ -50,14 +49,14 @@ const favoriteRequested = (payload) => {
 	}
 }
 
-const favoriteDeleted = (itemUuid) => {
-	return {
-		type: 'FAVORITE_DELETED',
-		payload: itemUuid
-	}
+const requestFavoriteDelete = (itemUuid) => (dispatch, getState) => {
+  api.deleteFavoriteItem(itemUuid)
+    .then(() => dispatch(fetchFavorite()))
+    .catch(() => dispatch(fetchFavorite()))
 }
 
 const fetchFavorite = () => (dispatch) => {
+
 	dispatch(favoriteRequested());
 
 	api.getFavoriteList().then(
@@ -75,16 +74,15 @@ const smartFetchFavorite = () => (dispatch, getState) => {
 export {
 	favoriteLoaded,
 
-	favoriteDeleted,
-
 	fetchFavorite,
 	smartFetchFavorite,
 
+  requestFavoriteDelete,
 
   blacklistLoaded,
 
-  blacklistDeleted,
-
   fetchBlacklist,
-  smartFetchBlacklist
+  smartFetchBlacklist,
+
+  requestBlacklistDelete,
 };

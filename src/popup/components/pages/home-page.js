@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import ItemList from '../core/item-list';
 
-import { smartFetchFavorite, favoriteDeleted } from '../../actions';
+import { smartFetchFavorite, requestFavoriteDelete } from '../../actions';
 
 import { connect } from 'react-redux';
 
-const HomePage = ({ favorite, smartFetchFavorite, favoriteDeleted }) => {
+const HomePage = ({ favorite, smartFetchFavorite, requestFavoriteDelete }) => {
 
   const itemDeletedWrapper = (uuid) => {
-    favoriteDeleted(uuid);
+    requestFavoriteDelete(uuid);
   }
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const mapStateToProps = ({ favorite }) => {
 
 const mapDispatchToProps = {
   smartFetchFavorite,
-  favoriteDeleted
+  requestFavoriteDelete
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

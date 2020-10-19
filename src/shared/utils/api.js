@@ -39,6 +39,23 @@ const api = {
     });
   },
 
+  deleteFavoriteItemByAttr: (attr, value) => {
+    return new Promise((resolve, reject) => {
+      api.getFavoriteList().then((oldList) => {
+        const newList = oldList.filter((item) => item[attr] !== value);
+        api.updateFavoriteList(newList)
+          .then(() => {
+            resolve()
+          })
+          .catch(reject);
+      })
+    });
+  },
+
+  deleteFavoriteItem: (uuid) => {
+    return api.deleteFavoriteItemByAttr('uuid', uuid);
+  },
+
   getBlacklist: () => {
     return new Promise((resolve, reject) => {
       chromeStorage.getBlacklist((data) => {
@@ -71,6 +88,21 @@ const api = {
         });
       })
     })
+  },
+
+  deleteBlacklistItemByAttr: (attr, value) => {
+    return new Promise((resolve, reject) => {
+      api.getBlacklist().then((oldList) => {
+        const newList = oldList.filter((item) => item[attr] !== value);
+        api.updateBlacklist(newList)
+          .then(resolve)
+          .catch(reject);
+      })
+    });
+  },
+
+  deleteBlacklistItem: (uuid) => {
+    return api.deleteBlacklistItemByAttr('uuid', uuid);
   },
 
 }
