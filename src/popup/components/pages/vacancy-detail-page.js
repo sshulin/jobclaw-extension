@@ -32,6 +32,7 @@ const VacancyDetailPage = ({ vacancy, uuid, fetchCurrentVacancy }) => {
             <div className="vacancy-detail__company">
               { vacancy.company }
             </div>
+            <div className="vacancy-detail__description" dangerouslySetInnerHTML={{__html: vacancy.description}} ></div>
           </div>
         </div>
       </div>

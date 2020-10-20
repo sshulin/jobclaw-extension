@@ -3,6 +3,7 @@ const hhToAppVacancy = (hhData) => {
     title: hhData.name,
     salary: hhData.salary,
     company: hhData.employer.name,
+    description: hhData.description,
     hhid: hhData.id
   }
 
