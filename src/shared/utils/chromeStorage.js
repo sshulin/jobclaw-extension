@@ -3,7 +3,7 @@
 const chromeStorage = {
 
   getVacancyList: (callback) => {
-    chrome.storage.sync.get('vacancy', (data) => {
+    chrome.storage.local.get('vacancy', (data) => {
       if(data && data.vacancy) {
         if(callback) callback(data.vacancy);
       } else {
@@ -12,7 +12,7 @@ const chromeStorage = {
     })
   },
   updateVacancyList: (data, callback) => {
-    chrome.storage.sync.set({'vacancy': data});
+    chrome.storage.local.set({'vacancy': data});
     if(callback) callback();
   },
 
