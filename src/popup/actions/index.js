@@ -36,17 +36,17 @@ const smartFetchBlacklist = () => (dispatch, getState) => {
 }
 
 const favoriteLoaded = (newItems) => {
-	return {
-		type: 'FAVORITE_LOADED',
-		payload: newItems
-	}
+  return {
+    type: 'FAVORITE_LOADED',
+    payload: newItems
+  }
 }
 
 const favoriteRequested = (payload) => {
-	return {
-		type: 'FAVORITE_REQUESTED',
-		payload: payload
-	}
+  return {
+    type: 'FAVORITE_REQUESTED',
+    payload: payload
+  }
 }
 
 const requestFavoriteDelete = (itemUuid) => (dispatch, getState) => {
@@ -57,18 +57,18 @@ const requestFavoriteDelete = (itemUuid) => (dispatch, getState) => {
 
 const fetchFavorite = () => (dispatch) => {
 
-	dispatch(favoriteRequested());
+  dispatch(favoriteRequested());
 
-	api.getFavoriteList().then(
-		(items) => dispatch(favoriteLoaded(items)),
-		(error) => dispatch(favoriteLoaded([]))
-	);
+  api.getFavoriteList().then(
+    (items) => dispatch(favoriteLoaded(items)),
+    (error) => dispatch(favoriteLoaded([]))
+  );
 }
 
 const smartFetchFavorite = () => (dispatch, getState) => {
-	const { favorite: { loaded } } = getState();
+  const { favorite: { loaded } } = getState();
 
-	if(!loaded) dispatch(fetchFavorite());
+  if(!loaded) dispatch(fetchFavorite());
 }
 
 const currentVacancyLoaded = (newValue) => {
@@ -96,10 +96,10 @@ const fetchCurrentVacancy = (uuid) => (dispatch, getState) => {
 }
 
 export {
-	favoriteLoaded,
+  favoriteLoaded,
 
-	fetchFavorite,
-	smartFetchFavorite,
+  fetchFavorite,
+  smartFetchFavorite,
 
   requestFavoriteDelete,
 
