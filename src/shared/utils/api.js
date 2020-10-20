@@ -26,6 +26,20 @@ const api = {
     });
   },
 
+  getVacancyItem: (uuid) => {
+    return new Promise((resolve, reject) => {
+      chromeStorage.getVacancyList((list) => {
+        const item = list.filter((innerItem) => innerItem.uuid === uuid)[0];
+
+        if(item) {
+          resolve(item);
+        } else {
+          reject(false);
+        }
+      })
+    })
+  },
+
   updateVacancyList: (params) => {
     return new Promise((resolve, reject) => {
       chromeStorage.updateVacancyList(params);

@@ -71,6 +71,30 @@ const smartFetchFavorite = () => (dispatch, getState) => {
 	if(!loaded) dispatch(fetchFavorite());
 }
 
+const currentVacancyLoaded = (newValue) => {
+  return {
+    type: 'CURRENT_VACANCY_LOADED',
+    payload: newValue
+  }
+}
+
+const currentVacancyRequested = (payload) => {
+  return {
+    type: 'CURRENT_VACANCY_REQUESTED',
+    payload: payload
+  }
+}
+
+const fetchCurrentVacancy = (uuid) => (dispatch, getState) => {
+
+  dispatch(currentVacancyRequested());
+
+  api.getVacancyItem(uuid).then(
+    (vacancy) => dispatch(currentVacancyLoaded(vacancy)),
+    (error) => dispatch(currentVacancyLoaded(null))
+  )
+}
+
 export {
 	favoriteLoaded,
 
@@ -85,4 +109,7 @@ export {
   smartFetchBlacklist,
 
   requestBlacklistDelete,
+
+  currentVacancyLoaded,
+  fetchCurrentVacancy,
 };

@@ -2,6 +2,8 @@
 
 import React from 'react';
 
+import { NavLink } from 'react-router-dom';
+
 const ItemList = ({items, itemDeleted}) => {
 
   const openHhLink = (item) => {
@@ -26,7 +28,13 @@ const ItemList = ({items, itemDeleted}) => {
               className="itemlist__item"
               >
               <div className="itemlist__title">
-                { item.title } { item.hhid ? (<span className="itemlist__hhlink" onClick={openHhLinkWrapper}>(hh.ru)</span>) : null }
+                <NavLink
+                  className="itemlist__title-link"
+                  to={"/vacancy/detail/" + item.uuid}
+                  >
+                  { item.title }
+                </NavLink>
+                { item.hhid ? (<span className="itemlist__hhlink" onClick={openHhLinkWrapper}>(hh.ru)</span>) : null }
               </div>
               { item.salary ? (
                 <div className="itemlist__salary">

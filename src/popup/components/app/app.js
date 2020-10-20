@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { HomePage, AnotherPage, BlacklistPage } from '../pages';
+import { HomePage, AnotherPage, BlacklistPage, VacancyDetailPage } from '../pages';
 import Navbar from '../core/navbar';
 
 const App = () => {
@@ -47,6 +47,10 @@ const App = () => {
             <Route
               path='/blacklist'
               component={BlacklistPage}
+            />
+            <Route
+              path='/vacancy/detail/:uuid'
+              component={VacancyDetailPage}
             />
           </Switch>
         </div>
