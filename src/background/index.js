@@ -5,6 +5,7 @@ import api from '../shared/utils/api';
 
 import hhToAppVacancy from '../shared/mappers/hhToAppVacancy';
 
+api.initRates();
 api.initDefaultVacancy([]);
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {

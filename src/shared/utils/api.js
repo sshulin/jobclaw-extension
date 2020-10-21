@@ -1,4 +1,5 @@
 import chromeStorage from './chromeStorage';
+import currencyApi from './currencyApi';
 
 import { v4 as uuidv4 } from 'uuid';
 
@@ -128,6 +129,32 @@ const api = {
 
   deleteBlacklistItem: (uuid) => {
     return api.deleteBlacklistItemByAttr('uuid', uuid);
+  },
+
+  initRates: () => {
+    api.getRates().then((list) => {
+      if(!list) {
+        currencyApi.getRates((data) => {
+          chromeStorage.updateRates(data.rates);
+        });
+      }
+    }).catch(() => {
+      currencyApi.getRates((data) => {
+        chromeStorage.updateRates(data.rates);
+      });
+    });
+  },
+
+  getRates: () => {
+    return new Promise((resolve, reject) => {
+      chromeStorage.getRates((data) => {
+        if(data) {
+          resolve(data);
+        } else {
+          reject(false)
+        }
+      })
+    });
   },
 
 }

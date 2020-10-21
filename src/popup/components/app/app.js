@@ -5,10 +5,15 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { HomePage, AnotherPage, BlacklistPage, VacancyDetailPage } from '../pages';
 import Navbar from '../core/navbar';
 
-const App = () => {
+import { fetchRates } from '../../actions';
+
+import { connect } from 'react-redux';
+
+const App = ({ fetchRates }) => {
 
 
   useEffect(() => {
+    fetchRates();
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         console.log(sender.tab ?
                     "from a content script:" + sender.tab.url :
@@ -59,4 +64,13 @@ const App = () => {
   )
 };
 
-export default App;
+
+const mapStateToProps = () => {
+  return {}
+}
+
+const mapDispatchToProps = {
+  fetchRates
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

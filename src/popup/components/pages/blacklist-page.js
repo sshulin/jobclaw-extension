@@ -5,7 +5,7 @@ import { smartFetchBlacklist, requestBlacklistDelete } from '../../actions';
 
 import { connect } from 'react-redux';
 
-const BlacklistPage = ({ blacklist, smartFetchBlacklist, requestBlacklistDelete }) => {
+const BlacklistPage = ({ blacklist, rates, smartFetchBlacklist, requestBlacklistDelete }) => {
 
   const itemDeletedWrapper = (uuid) => {
     requestBlacklistDelete(uuid);
@@ -25,6 +25,7 @@ const BlacklistPage = ({ blacklist, smartFetchBlacklist, requestBlacklistDelete 
           <ItemList
             items={blacklist}
             itemDeleted={itemDeletedWrapper}
+            rates={rates}
           />
         </div>
       </div>
@@ -32,9 +33,10 @@ const BlacklistPage = ({ blacklist, smartFetchBlacklist, requestBlacklistDelete 
   )
 }
 
-const mapStateToProps = ({ blacklist }) => {
+const mapStateToProps = ({ blacklist, rates }) => {
   return {
-    blacklist
+    blacklist,
+    rates: rates.data,
   }
 }
 

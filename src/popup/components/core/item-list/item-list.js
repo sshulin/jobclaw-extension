@@ -4,7 +4,11 @@ import React from 'react';
 
 import { NavLink } from 'react-router-dom';
 
-const ItemList = ({items, itemDeleted}) => {
+import Salary from '../salary';
+
+import convertSalary from '../../../../shared/mappers/convertSalary';
+
+const ItemList = ({items, itemDeleted, rates}) => {
 
   const openHhLink = (item) => {
     chrome.tabs.create({url: 'https://hh.ru/vacancy/' + item.hhid});
@@ -38,10 +42,10 @@ const ItemList = ({items, itemDeleted}) => {
               </div>
               { item.salary ? (
                 <div className="itemlist__salary">
-                  { item.salary.from ? (<span>{ item.salary.from }</span>) : null }
-                  { item.salary.from && item.salary.to ? (<span> - </span>) : null }
-                  { item.salary.to ? (<span>{ item.salary.to }</span>) : null }
-                  { item.salary.currency ? (<span className="itemlist__salary-currency">{ item.salary.currency }</span>) : null }
+                  <Salary salary={ item.salary } />
+                  { rates && rates[item.salary.currency] && item.salary.currency !== 'RUR' ? (
+                   <span>(<Salary salary={ convertSalary(item.salary, rates) } />)</span>
+                  ) : null}
                 </div>
               ) : (
                 <div className="itemlist__salary"></div>

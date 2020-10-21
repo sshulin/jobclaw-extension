@@ -5,7 +5,7 @@ import { smartFetchFavorite, requestFavoriteDelete } from '../../actions';
 
 import { connect } from 'react-redux';
 
-const HomePage = ({ favorite, smartFetchFavorite, requestFavoriteDelete }) => {
+const HomePage = ({ favorite, rates, smartFetchFavorite, requestFavoriteDelete }) => {
 
   const itemDeletedWrapper = (uuid) => {
     requestFavoriteDelete(uuid);
@@ -25,6 +25,7 @@ const HomePage = ({ favorite, smartFetchFavorite, requestFavoriteDelete }) => {
           <ItemList
             items={favorite}
             itemDeleted={itemDeletedWrapper}
+            rates={rates}
           />
         </div>
       </div>
@@ -32,9 +33,10 @@ const HomePage = ({ favorite, smartFetchFavorite, requestFavoriteDelete }) => {
   )
 }
 
-const mapStateToProps = ({ favorite }) => {
+const mapStateToProps = ({ favorite, rates }) => {
   return {
-    favorite
+    favorite,
+    rates: rates.data
   }
 }
 

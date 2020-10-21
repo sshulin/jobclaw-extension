@@ -16,6 +16,20 @@ const chromeStorage = {
     if(callback) callback();
   },
 
+  getRates: (callback) => {
+    chrome.storage.local.get('rates', (data) => {
+      if(data && data.rates) {
+        if(callback) callback(data.rates);
+      } else {
+        callback(false)
+      }
+    })
+  },
+  updateRates: (data, callback) => {
+    chrome.storage.local.set({'rates': data});
+    if(callback) callback();
+  },
+
   subscribe: (callback) => {
     chrome.storage.onChanged.addListener(() => {
       if(callback) callback();

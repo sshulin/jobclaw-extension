@@ -95,6 +95,30 @@ const fetchCurrentVacancy = (uuid) => (dispatch, getState) => {
   )
 }
 
+const ratesLoaded = (newValue) => {
+  return {
+    type: 'RATES_LOADED',
+    payload: newValue
+  }
+}
+
+const ratesRequested = (payload) => {
+  return {
+    type: 'RATES_REQUESTED',
+    payload: payload
+  }
+}
+
+const fetchRates = () => (dispatch, getState) => {
+
+  dispatch(ratesRequested());
+
+  api.getRates().then(
+    (data) => dispatch(ratesLoaded(data)),
+    (error) => dispatch(ratesLoaded(null))
+  )
+}
+
 export {
   favoriteLoaded,
 
@@ -112,4 +136,6 @@ export {
 
   currentVacancyLoaded,
   fetchCurrentVacancy,
+
+  fetchRates,
 };
