@@ -14,11 +14,11 @@ const Navbar = () => {
           <i className="fa fa-bars"></i>
         </NavLink>
         <NavLink
-          to="/home"
+          to="/favorite"
           className="navbar__item"
           activeClassName="navbar__item--active"
           >
-          <i className="fa fa-briefcase"></i>
+          <i className="fa fa-heart"></i>
         </NavLink>
         <NavLink
           to="/blacklist"

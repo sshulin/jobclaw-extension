@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { HomePage, AnotherPage, BlacklistPage, VacancyDetailPage } from '../pages';
+import { FavoritePage, AnotherPage, BlacklistPage, VacancyDetailPage } from '../pages';
 import Navbar from '../core/navbar';
 
 import { fetchRates } from '../../actions';
@@ -37,13 +37,13 @@ const App = ({ fetchRates }) => {
             <Route
               path='/'
               render={() => {
-                return (<Redirect to="/home" />)
+                return (<Redirect to="/favorite" />)
               }}
               exact
             />
             <Route
-              path='/home'
-              component={HomePage}
+              path='/favorite'
+              component={FavoritePage}
             />
             <Route
               path='/another'

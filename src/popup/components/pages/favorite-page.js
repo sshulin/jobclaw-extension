@@ -5,7 +5,7 @@ import { smartFetchFavorite, requestFavoriteDelete } from '../../actions';
 
 import { connect } from 'react-redux';
 
-const HomePage = ({ favorite, rates, smartFetchFavorite, requestFavoriteDelete }) => {
+const FavoritePage = ({ favorite, rates, smartFetchFavorite, requestFavoriteDelete }) => {
 
   const itemDeletedWrapper = (uuid) => {
     requestFavoriteDelete(uuid);
@@ -19,7 +19,7 @@ const HomePage = ({ favorite, rates, smartFetchFavorite, requestFavoriteDelete }
     <div className="page">
       <div className="page__wrapper">
         <div className="page__title">
-          Home page
+          Favorite page
         </div>
         <div className="page__section page__section--grower">
           <ItemList
@@ -45,4 +45,4 @@ const mapDispatchToProps = {
   requestFavoriteDelete
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(FavoritePage);
