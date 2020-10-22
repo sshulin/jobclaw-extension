@@ -22,6 +22,9 @@
   &__company {
     font-size: 10px;
   }
+  &__description {
+    @extend .custom-html;
+  }
   &__actions {
     display: flex;
     margin-top: 10px;
