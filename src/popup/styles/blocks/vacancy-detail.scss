@@ -1,4 +1,13 @@
 .vacancy-detail {
+  &--overlay {
+    bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    left: 10px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
   &__title {
     font-size: 12px;
   }
@@ -22,7 +31,18 @@
   &__company {
     font-size: 10px;
   }
+  &__description-wrapper {
+    flex-grow: 1;
+    position: relative;
+  }
   &__description {
+    background: #f0f0f0;
+    height: 100%;
+    left: 0;
+    overflow-y: auto;
+    position: absolute;
+    top: 0;
+    width: 100%;
     @extend .custom-html;
   }
   &__actions {

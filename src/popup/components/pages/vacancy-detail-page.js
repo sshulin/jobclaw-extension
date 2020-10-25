@@ -20,7 +20,7 @@ const VacancyDetailPage = ({ vacancy, rates, uuid, fetchCurrentVacancy }) => {
           { vacancy.title }
         </div>
         <div className="page__section page__section--grower">
-          <div className="vacancy-detail">
+          <div className="vacancy-detail vacancy-detail--overlay">
             { vacancy.salary ? (
               <div className="vacancy-detail__salary">
                 <Salary salary={ vacancy.salary } />
@@ -34,7 +34,9 @@ const VacancyDetailPage = ({ vacancy, rates, uuid, fetchCurrentVacancy }) => {
             <div className="vacancy-detail__company">
               { vacancy.company }
             </div>
-            <div className="vacancy-detail__description" dangerouslySetInnerHTML={{__html: vacancy.description}} ></div>
+            <div className="vacancy-detail__description-wrapper">
+              <div className="vacancy-detail__description" dangerouslySetInnerHTML={{__html: vacancy.description}} ></div>
+            </div>
             <div className="vacancy-detail__date-list">
               <div className="vacancy-detail__date-item">
                 <div className="vacancy-detail__date-icon">
