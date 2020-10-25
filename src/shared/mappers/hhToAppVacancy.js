@@ -4,6 +4,8 @@ const hhToAppVacancy = (hhData) => {
     salary: hhData.salary,
     company: hhData.employer.name,
     description: hhData.description,
+    date_created: hhData.created_at,
+    date_updated: hhData.published_at,
     hhid: hhData.id
   }
 

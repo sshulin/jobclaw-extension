@@ -34,6 +34,24 @@ const VacancyDetailPage = ({ vacancy, rates, uuid, fetchCurrentVacancy }) => {
               { vacancy.company }
             </div>
             <div className="vacancy-detail__description" dangerouslySetInnerHTML={{__html: vacancy.description}} ></div>
+            <div className="vacancy-detail__date-list">
+              <div className="vacancy-detail__date-item">
+                <div className="vacancy-detail__date-icon">
+                  <i className="fa fa-plus"></i>
+                </div>
+                <div className="vacancy-detail__date-value">
+                  { vacancy.date_created }
+                </div>
+              </div>
+              <div className="vacancy-detail__date-item">
+                <div className="vacancy-detail__date-icon">
+                  <i className="fa fa-save"></i>
+                </div>
+                <div className="vacancy-detail__date-value">
+                  { vacancy.date_updated }
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
