@@ -3,6 +3,7 @@ import Salary from '../core/salary';
 
 import { fetchCurrentVacancy } from '../../actions';
 import convertSalary from '../../../shared/mappers/convertSalary';
+import timestampStringify from '../../../shared/stringifiers/timestampStringify';
 
 import { connect } from 'react-redux';
 
@@ -40,7 +41,7 @@ const VacancyDetailPage = ({ vacancy, rates, uuid, fetchCurrentVacancy }) => {
                   <i className="fa fa-plus"></i>
                 </div>
                 <div className="vacancy-detail__date-value">
-                  { vacancy.date_created }
+                  { timestampStringify(vacancy.date_created) }
                 </div>
               </div>
               <div className="vacancy-detail__date-item">
@@ -48,7 +49,7 @@ const VacancyDetailPage = ({ vacancy, rates, uuid, fetchCurrentVacancy }) => {
                   <i className="fa fa-save"></i>
                 </div>
                 <div className="vacancy-detail__date-value">
-                  { vacancy.date_updated }
+                  { timestampStringify(vacancy.date_updated) }
                 </div>
               </div>
             </div>

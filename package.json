@@ -7,6 +7,7 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
+    "dayjs": "^1.9.4",
     "font-awesome": "^4.7.0",
     "node-sass": "^4.13.1",
     "npm-font-open-sans": "^1.1.0",
